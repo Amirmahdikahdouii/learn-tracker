@@ -9,6 +9,16 @@ Features:
 - Dark mode
 - Export all courses to a JSON file, import them back in (with automatic de-duplication), or download a blank JSON template to hand-author a course
 
+## Screenshots
+
+**Dashboard** — see all your courses and their progress at a glance:
+
+![Dashboard listing courses with progress](./assets/index.png)
+
+**Course page** — drill into chapters and check off sections as you complete them:
+
+![Course page with chapters and sections](./assets/course-page.png)
+
 ## Development
 
 The app lives in [frontend/](frontend/).
