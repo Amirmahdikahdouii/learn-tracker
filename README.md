@@ -19,6 +19,12 @@ Features:
 
 ![Course page with chapters and sections](./assets/course-page.png)
 
+## Live demo
+
+Try LearnTrack in your browser (no install required): **[https://amirmahdikahdouii.github.io/learn-tracker/](https://amirmahdikahdouii.github.io/learn-tracker/)**
+
+The demo loads sample courses on first visit. You can edit, track progress, and import/export JSON — all changes are stored in your browser only. Pushes to the `demo` branch auto-deploy via GitHub Actions.
+
 ## Development
 
 The app lives in [frontend/](frontend/).

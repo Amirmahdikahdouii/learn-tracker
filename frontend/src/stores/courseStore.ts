@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { useStorage } from '@vueuse/core';
 import { Course } from '../types';
 import { v4 as uuidv4 } from 'uuid';
+import { DEMO_COURSES } from '../data/demoCourses';
 
 export const useCourseStore = defineStore('courses', {
   state: () => ({
@@ -94,6 +95,15 @@ export const useCourseStore = defineStore('courses', {
       linkElement.setAttribute('href', dataUri);
       linkElement.setAttribute('download', exportFileDefaultName);
       linkElement.click();
-    }
+    },
+    seedDemoIfNeeded() {
+      if (import.meta.env.VITE_DEMO_MODE !== 'true') return;
+      if (this.courses.length > 0) return;
+      this.courses.push(...structuredClone(DEMO_COURSES));
+    },
+    resetDemoData() {
+      if (import.meta.env.VITE_DEMO_MODE !== 'true') return;
+      this.courses.splice(0, this.courses.length, ...structuredClone(DEMO_COURSES));
+    },
   }
 });

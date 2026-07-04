@@ -2,13 +2,14 @@
 import { ref } from 'vue';
 import { useCourseStore } from './stores/courseStore';
 import { useDarkMode } from './composables/useDarkMode';
-import { Moon, Sun, Download, Upload, Plus, AlertCircle, FileJson } from 'lucide-vue-next';
+import { Moon, Sun, Download, Upload, Plus, AlertCircle, FileJson, RotateCcw, Info } from 'lucide-vue-next';
 import Dashboard from './components/Dashboard.vue';
 import CourseDetail from './components/CourseDetail.vue';
 import CourseEditor from './components/CourseEditor.vue';
 
 const store = useCourseStore();
 const { isDark, toggleDark } = useDarkMode();
+const isDemoMode = import.meta.env.VITE_DEMO_MODE === 'true';
 
 const currentView = ref<'dashboard' | 'detail' | 'editor'>('dashboard');
 const selectedCourseId = ref<string | null>(null);
@@ -114,6 +115,12 @@ function handleImport(event: Event) {
           <button @click="fileInput?.click()" class="px-3 py-1.5 text-xs font-medium hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 rounded transition flex items-center gap-2" title="Import JSON">
             <Upload class="w-4 h-4" /> Import
           </button>
+          <template v-if="isDemoMode">
+            <div class="w-px h-5 bg-slate-300 dark:bg-slate-700 my-auto"></div>
+            <button @click="store.resetDemoData(); goToDashboard()" class="px-3 py-1.5 text-xs font-medium hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 rounded transition flex items-center gap-2" title="Reset demo data">
+              <RotateCcw class="w-4 h-4" /> Reset demo
+            </button>
+          </template>
         </div>
         <input type="file" ref="fileInput" accept=".json" class="hidden" @change="handleImport" />
         
@@ -125,6 +132,14 @@ function handleImport(event: Event) {
         </button>
       </div>
     </header>
+
+    <div
+      v-if="isDemoMode"
+      class="bg-indigo-50 dark:bg-indigo-950/40 border-b border-indigo-200 dark:border-indigo-900 px-6 py-2 flex items-center gap-2 text-sm text-indigo-800 dark:text-indigo-200"
+    >
+      <Info class="w-4 h-4 shrink-0" />
+      <span>Demo mode — changes are saved only in this browser.</span>
+    </div>
 
     <main class="flex-1 w-full max-w-6xl mx-auto p-4 sm:p-6 lg:p-8 flex flex-col h-[calc(100vh-4rem)]">
       <Dashboard 
