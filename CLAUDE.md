@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 LearnTrack is a client-side course progress tracker: courses have chapters, chapters have sections, and sections are marked complete/incomplete. All app code lives under `frontend/`; there is no backend — the app was scaffolded from a Google AI Studio Vue template (hence the `@google/genai`/`express` deps in `frontend/package.json`), but none of that is wired up or used anywhere in `frontend/src`.
 
+The repo also contains standalone utility scripts under `utils/`, unrelated to the frontend's build/runtime — see below.
+
 ## Commands
 
 All commands run from `frontend/`:
@@ -34,3 +36,7 @@ There is no test suite configured in this repo.
 
 - `vite.config.ts` disables HMR/file-watching when the `DISABLE_HMR` env var is `true` — this is an AI Studio agent-editing accommodation; don't remove it.
 - `tsconfig.json` sets `jsx: "react-jsx"` even though this is a Vue project — leftover from the template; harmless since there's no JSX in the codebase, but don't take it as a signal to use React patterns.
+
+## utils/maktabKhooneCourseExtractor
+
+A standalone Python script (`main.py`, no relation to the Vite/npm toolchain) that scrapes a course page from maktabkhoone.org (by URL or saved HTML file) with BeautifulSoup and prints a JSON array shaped exactly like LearnTrack's `Course[]` type (`frontend/src/types.ts`), for direct import into the app. See [utils/maktabKhooneCourseExtractor/README.md](utils/maktabKhooneCourseExtractor/README.md) for setup/usage. Its dependencies (`requirements.txt`) are isolated from the frontend's `package.json` — don't conflate the two when installing or scripting either project.
