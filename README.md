@@ -24,7 +24,7 @@ Features:
 
 Try LearnTrack in your browser (no install required): **[https://amirmahdikahdouii.github.io/learn-tracker/](https://amirmahdikahdouii.github.io/learn-tracker/)**
 
-The demo loads sample courses on first visit. You can edit, track progress, and import/export JSON — all changes are stored in your browser only. Pushes to the `demo` branch auto-deploy via GitHub Actions.
+The demo loads sample courses (complete with cover images and a pre-filled activity heatmap) on first visit. You can edit, track progress, and import/export JSON — all changes are stored in your browser only. Pushes to the `demo` branch auto-deploy via GitHub Actions.
 
 ## Development
 
