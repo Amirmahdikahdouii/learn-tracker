@@ -1,0 +1,22 @@
+---
+description: Keep README.md and CLAUDE.md in sync after implementing features
+alwaysApply: true
+---
+
+# Keep root docs in sync
+
+After implementing a feature or otherwise notable change (new component, store
+field, utility script, npm script, config behavior, etc.), update both
+[README.md](../../README.md) and [CLAUDE.md](../../CLAUDE.md) in the same
+change so they stay accurate — don't leave this for a separate/later pass.
+
+- `README.md` is user-facing: update the feature list, "Utility scripts"
+  section, screenshots, or setup/commands sections as relevant to what
+  changed.
+- `CLAUDE.md` is agent-facing: update the "Architecture" bullets, add/update a
+  `## utils/<toolName>` section for new utility scripts, or add a "Notes" bullet
+  for any non-obvious gotcha introduced by the change.
+
+Skip this for pure refactors, bug fixes, or internal changes with no
+user-visible or architecturally-relevant effect — don't pad the docs with
+noise. When in doubt, prefer a small accurate update over none.
