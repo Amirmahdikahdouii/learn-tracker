@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { Youtube, MonitorPlay, GraduationCap, Terminal, Code, BookOpen, Sparkles, Building2, Smartphone } from 'lucide-vue-next';
+import { Youtube, MonitorPlay, GraduationCap, Terminal, Code, BookOpen, Sparkles, Building2, Smartphone, Boxes } from 'lucide-vue-next';
 
 const props = defineProps<{
   provider?: string;
@@ -24,6 +24,8 @@ const brandConfig = computed(() => {
       return { bg: 'bg-red-100 dark:bg-red-500/20', text: 'text-red-700 dark:text-red-400', border: 'border-red-200 dark:border-red-500/30', icon: Youtube };
     case 'hamrah.academy':
       return { bg: 'bg-cyan-100 dark:bg-cyan-500/20', text: 'text-cyan-700 dark:text-cyan-400', border: 'border-cyan-200 dark:border-cyan-500/30', icon: Smartphone };
+    case 'Pluralsight':
+      return { bg: 'bg-pink-100 dark:bg-pink-500/20', text: 'text-pink-700 dark:text-pink-400', border: 'border-pink-200 dark:border-pink-500/30', icon: Boxes };
     default:
       return { bg: 'bg-gray-100 dark:bg-gray-800', text: 'text-gray-600 dark:text-gray-400', border: 'border-gray-200 dark:border-gray-700', icon: Building2 };
   }
