@@ -12,7 +12,7 @@ The repo also contains standalone utility scripts under `utils/`, unrelated to t
 
 All commands run from `frontend/`:
 
-```
+```bash
 npm install       # install deps
 npm run dev       # vite dev server on port 3000, host 0.0.0.0
 npm run build     # vite build
@@ -22,9 +22,17 @@ npm run lint      # type-check only (tsc --noEmit) — there is no eslint/pretti
 
 There is no test suite configured in this repo.
 
+From the repo root, you can also run the production build in Docker:
+
+```bash
+docker compose up --build   # build frontend image and serve on localhost:3000
+docker compose down         # stop/remove containers
+```
+
 ## Architecture
 
 - **Stack**: Vue 3 (`<script setup>` SFCs) + TypeScript + Pinia + Vite + Tailwind v4 (via `@tailwindcss/vite`).
+- **Container runtime**: `frontend/Dockerfile` uses a multi-stage image (`node:22-alpine` build stage + `nginx:alpine` runtime) to serve `dist/`; root `docker-compose.yml` exposes it at `http://localhost:3000`.
 - **State & persistence**: All app state lives in a single Pinia store, [frontend/src/stores/courseStore.ts](frontend/src/stores/courseStore.ts). Course data is persisted via `useStorage` from `@vueuse/core`, which syncs directly to `localStorage` under the key `local-first-courses` — there is no backend/API layer. Any change to the store's `courses` array is auto-persisted.
 - **Data model** ([frontend/src/types.ts](frontend/src/types.ts)): `Course` → `Chapter[]` → `Section[]`, each with its own `id` (UUIDs via the `uuid` package). A `Course` also has an optional `imageUrl` (cover image shown on the dashboard card, entered as a URL in `CourseEditor`; broken URLs are hidden via an `@error` handler rather than showing a broken-image icon). A `Section` gets a `completedAt` ISO timestamp set/cleared in `toggleSectionCompletion` whenever it's checked/unchecked. Progress percentages are derived getters on the store (`getChapterProgress`, `getCourseProgress`), not stored fields — never persist a computed progress value.
 - **Activity heatmap**: The store's `getActivityData` getter buckets every completed section's `completedAt` by day (`YYYY-MM-DD`) into a `Record<string, number>` count map across all courses. [frontend/src/components/ActivityHeatmap.vue](frontend/src/components/ActivityHeatmap.vue) renders this as a GitHub-contributions-style 52-week grid on the dashboard; it's purely derived from existing section data, so it needs no separate persistence.

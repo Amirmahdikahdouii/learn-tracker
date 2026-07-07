@@ -3,6 +3,7 @@
 LearnTrack is a simple, local-first course progress tracker. Add the online courses you're taking, break each one down into chapters and sections, and check off sections as you complete them to see your progress per chapter and per course. All data is stored in your browser's `localStorage` — there's no account or backend, and you can export/import your courses as JSON to back them up or move them between browsers.
 
 Features:
+
 - Track multiple courses, each with a title, provider (e.g. Udemy, Coursera), URL, and an optional cover image
 - Organize each course into chapters and sections, with per-chapter and overall progress bars
 - Toggle section completion with a click
@@ -44,6 +45,22 @@ Other useful commands (run from `frontend/`):
 npm run build     # production build
 npm run preview   # preview the production build locally
 npm run lint      # type-check the project (tsc --noEmit)
+```
+
+## Docker
+
+Run the app with Docker Compose from the repo root:
+
+```bash
+docker compose up --build
+```
+
+Then open `http://localhost:3000`.
+
+To stop the containers:
+
+```bash
+docker compose down
 ```
 
 ## Course JSON template
