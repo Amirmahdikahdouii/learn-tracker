@@ -31,6 +31,20 @@ export const useCourseStore = defineStore('courses', {
       
       if (totalSections === 0) return 0;
       return Math.round((completedSections / totalSections) * 100);
+    },
+    getActivityData: (state) => {
+      const data: Record<string, number> = {};
+      state.courses.forEach(course => {
+        course.chapters.forEach(chapter => {
+          chapter.sections.forEach(section => {
+            if (section.isCompleted && section.completedAt) {
+              const dateStr = section.completedAt.split('T')[0];
+              data[dateStr] = (data[dateStr] || 0) + 1;
+            }
+          });
+        });
+      });
+      return data;
     }
   },
   actions: {
@@ -57,6 +71,11 @@ export const useCourseStore = defineStore('courses', {
           const section = chapter.sections.find((s) => s.id === sectionId);
           if (section) {
             section.isCompleted = !section.isCompleted;
+            if (section.isCompleted) {
+              section.completedAt = new Date().toISOString();
+            } else {
+              delete section.completedAt;
+            }
           }
         }
       }

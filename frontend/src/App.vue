@@ -31,6 +31,7 @@ function downloadTemplate() {
       "id": "template-course-1",
       "title": "Example Template Course",
       "url": "https://example.com/course",
+      "imageUrl": "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&auto=format&fit=crop",
       "provider": "Udemy",
       "chapters": [
         {

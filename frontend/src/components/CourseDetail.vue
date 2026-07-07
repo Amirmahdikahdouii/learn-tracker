@@ -47,8 +47,8 @@ const formattedUrl = computed(() => {
 
 <template>
   <div v-if="course" class="flex-1 flex flex-col bg-white dark:bg-[#020617] p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-inner overflow-hidden max-h-full transition-colors duration-200">
-    <div class="flex items-start justify-between mb-8 shrink-0">
-      <div class="flex-1 pr-6">
+    <div class="flex flex-col md:flex-row items-start justify-between mb-8 shrink-0 gap-6">
+      <div class="flex-1 pr-0 md:pr-6 min-w-0">
         <div class="flex items-center space-x-2 text-xs text-slate-500 mb-3">
           <span class="hover:text-indigo-600 dark:hover:text-indigo-400 cursor-pointer flex items-center transition" @click="emit('back')">
             <ArrowLeft class="w-3.5 h-3.5 mr-1" /> Dashboard
@@ -81,9 +81,15 @@ const formattedUrl = computed(() => {
           </button>
         </div>
       </div>
-      <div class="w-32 h-32 rounded-xl bg-slate-50 dark:bg-slate-800 flex flex-col items-center justify-center border border-slate-200 dark:border-slate-700 shadow-sm dark:shadow-inner shrink-0 transition-colors">
-        <span class="text-3xl font-black" :class="courseProgress === 100 ? 'text-green-500 dark:text-green-400' : 'text-indigo-600 dark:text-indigo-400'">{{ courseProgress }}%</span>
-        <span class="text-[10px] uppercase tracking-wider text-slate-500 mt-1 font-bold">Overall</span>
+      
+      <div class="flex items-center gap-4 shrink-0 w-full md:w-auto overflow-hidden">
+        <div v-if="course.imageUrl" class="hidden md:block w-32 h-32 md:w-48 lg:w-56 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm shrink-0 overflow-hidden">
+          <img :src="course.imageUrl" alt="Course Cover" class="w-full h-full object-cover" @error="$event.target.style.display='none'" />
+        </div>
+        <div class="w-32 h-32 rounded-xl bg-slate-50 dark:bg-slate-800 flex flex-col items-center justify-center border border-slate-200 dark:border-slate-700 shadow-sm dark:shadow-inner shrink-0 transition-colors">
+          <span class="text-3xl font-black" :class="courseProgress === 100 ? 'text-green-500 dark:text-green-400' : 'text-indigo-600 dark:text-indigo-400'">{{ courseProgress }}%</span>
+          <span class="text-[10px] uppercase tracking-wider text-slate-500 mt-1 font-bold">Overall</span>
+        </div>
       </div>
     </div>
 
