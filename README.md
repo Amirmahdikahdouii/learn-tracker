@@ -52,4 +52,5 @@ npm run lint      # type-check the project (tsc --noEmit)
 
 ## Utility scripts
 
-[utils/maktabKhooneCourseExtractor/](utils/maktabKhooneCourseExtractor/) is a Python script that scrapes a course outline from [maktabkhoone.org](https://maktabkhoone.org) and converts it into a JSON file you can import directly into LearnTrack, instead of manually entering chapters and sections. See its [README](utils/maktabKhooneCourseExtractor/README.md) for setup and usage.
+- [utils/maktabKhooneCourseExtractor/](utils/maktabKhooneCourseExtractor/) is a Python script that scrapes a course outline from [maktabkhoone.org](https://maktabkhoone.org) and converts it into a JSON file you can import directly into LearnTrack, instead of manually entering chapters and sections. See its [README](utils/maktabKhooneCourseExtractor/README.md) for setup and usage.
+- [utils/hamrahAcademyCourseExtractor/](utils/hamrahAcademyCourseExtractor/) does the same thing for [hamrah.academy](https://hamrah.academy) course pages. See its [README](utils/hamrahAcademyCourseExtractor/README.md) for setup and usage.
