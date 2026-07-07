@@ -2,6 +2,7 @@ export interface Section {
   id: string;
   title: string;
   isCompleted: boolean;
+  completedAt?: string;
 }
 
 export interface Chapter {
@@ -15,5 +16,6 @@ export interface Course {
   title: string;
   url?: string;
   provider?: string;
+  imageUrl?: string;
   chapters: Chapter[];
 }

@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { useCourseStore } from '../stores/courseStore';
 import { Plus, BookOpen, Edit2, Trash2, ExternalLink } from 'lucide-vue-next';
 import ProviderBadge from './ProviderBadge.vue';
+import ActivityHeatmap from './ActivityHeatmap.vue';
 
 const store = useCourseStore();
 
@@ -42,6 +43,8 @@ function cancelDelete() {
       </button>
     </div>
 
+    <ActivityHeatmap />
+
     <div v-if="store.courses.length === 0" class="flex-1 flex flex-col items-center justify-center bg-slate-50 dark:bg-[#1e293b]/50 rounded-xl border border-slate-200 dark:border-slate-800 border-dashed transition-colors duration-200">
       <BookOpen class="h-12 w-12 text-slate-400 dark:text-slate-600 mb-4" />
       <h3 class="text-sm font-medium text-slate-700 dark:text-slate-300">No courses yet</h3>
@@ -62,6 +65,9 @@ function cancelDelete() {
         class="bg-slate-50 dark:bg-[#1e293b] rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden hover:border-slate-300 dark:hover:border-slate-700 transition group flex flex-col cursor-pointer min-h-[160px]"
         @click="emit('view-course', course.id)"
       >
+        <div v-if="course.imageUrl" class="h-32 w-full overflow-hidden shrink-0 border-b border-slate-200 dark:border-slate-800 bg-slate-200 dark:bg-slate-800">
+          <img :src="course.imageUrl" alt="Course Cover" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" @error="$event.target.style.display='none'" />
+        </div>
         <div class="p-5 flex-1 flex flex-col">
           <div class="flex items-start justify-between gap-4">
             <div>

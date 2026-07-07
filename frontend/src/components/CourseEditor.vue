@@ -122,6 +122,21 @@ function saveCourse() {
         </div>
 
         <div class="space-y-2">
+          <label class="block text-sm font-medium text-slate-700 dark:text-slate-400">Course Image URL (Optional)</label>
+          <div class="flex gap-4 items-start">
+            <input 
+              v-model="formCourse.imageUrl" 
+              type="url" 
+              placeholder="e.g. https://example.com/cover.jpg" 
+              class="w-full bg-slate-50 dark:bg-[#1e293b] border border-slate-300 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition"
+            />
+            <div v-if="formCourse.imageUrl" class="shrink-0 w-16 h-12 rounded bg-slate-200 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 overflow-hidden">
+              <img :src="formCourse.imageUrl" alt="Preview" class="w-full h-full object-cover" @error="$event.target.style.display='none'" @load="$event.target.style.display='block'" />
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-2">
           <label class="block text-sm font-medium text-slate-700 dark:text-slate-400">Course Provider</label>
           <select 
             v-model="formCourse.provider" 
@@ -135,6 +150,7 @@ function saveCourse() {
             <option value="Faradars.org">Faradars.org</option>
             <option value="Antropic courses">Antropic courses</option>
             <option value="YouTube">YouTube</option>
+            <option value="hamrah.academy">hamrah.academy</option>
           </select>
         </div>
       </div>
